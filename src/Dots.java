@@ -69,7 +69,7 @@ public class Dots extends PApplet {
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("MMddyyyyhhmmss");
         String formattedDate = sdf.format(date);
-        save(String.format("/Users/milenkoviclazar/sandbox/generative_art/output/dots%s.jpg", formattedDate));
+        save(String.format("/Users/milenkoviclazar/sandbox/generative_art/dots%s.jpg", formattedDate));
     }
 
 }

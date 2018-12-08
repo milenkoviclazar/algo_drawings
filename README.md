@@ -3,6 +3,11 @@
 ![Voronoi](images/voronoi_1.jpg?raw=true "Voronoi")
 ---
 
+![Squares](images/square_1.jpg?raw=true "Square1")  | ![Squares](images/square_2.jpg?raw=true "Square2")
+:-------------------------:|:-------------------------:
+![Squares](images/square_3.jpg?raw=true "Square3")  | ![Squares](images/square_4.jpg?raw=true "Square4")
+---
+
 ![Circles](images/circles_1.jpg?raw=true "Circles")
 ---
 

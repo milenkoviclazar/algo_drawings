@@ -15,7 +15,8 @@ public class Voronoi extends PApplet {
     }
 
     public void settings() {
-        size(1630, 630);
+//        size(1630, 630);
+        size(400, 400);
     }
 
     public void setup() {

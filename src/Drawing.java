@@ -134,7 +134,7 @@ public class Drawing extends PApplet {
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("MMddyyyyhhmmss");
         String formattedDate = sdf.format(date);
-        save(String.format("/Users/milenkoviclazar/sandbox/generative_art/output/hand_drawing%s.jpg", formattedDate));
+        save(String.format("/Users/milenkoviclazar/sandbox/generative_art/hand_drawing%s.jpg", formattedDate));
         exit();
     }
 }

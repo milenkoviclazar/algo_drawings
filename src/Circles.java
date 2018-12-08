@@ -41,6 +41,6 @@ public class Circles extends PApplet {
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("MMddyyyyhhmmss");
         String formattedDate = sdf.format(date);
-        save(String.format("/Users/milenkoviclazar/sandbox/generative_art/output/circles_%s.jpg", formattedDate));
+        save(String.format("/Users/milenkoviclazar/sandbox/generative_art/circles_%s.jpg", formattedDate));
     }
 }

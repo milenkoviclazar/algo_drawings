@@ -35,7 +35,7 @@ public class LinesNet extends PApplet {
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("MMddyyyyhhmmss");
         String formattedDate = sdf.format(date);
-        save(String.format("/Users/milenkoviclazar/sandbox/generative_art/output/lines%s.jpg", formattedDate));
+        save(String.format("/Users/milenkoviclazar/sandbox/generative_art/lines%s.jpg", formattedDate));
     }
 
 }
