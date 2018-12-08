@@ -1,0 +1,88 @@
+<html>
+<body>
+<canvas id="canvas" width="1000" height="1000"></canvas>
+<script type="text/javascript">
+var elem = document.getElementById('canvas');
+var context = elem.getContext('2d');
+
+var xpoints = [];
+var ypoints = [];
+var clr = [];
+var radius = 500;
+var cnt = 300;
+var xmid = elem.width / 2;
+var ymid = elem.height / 2;
+
+function drawLine(x1, y1, x2, y2)
+{
+	context.beginPath();
+	context.strokeStyle = 'black';
+	context.globalAlpha = 0.1;
+	context.moveTo(x1, y1);
+	context.lineTo(x2, y2);
+	context.stroke();
+}
+
+function get_random_color()
+{
+	var color = 0;
+    color += Math.round(255 * Math.random());
+	color <<= 8;
+	color += Math.round(255 * Math.random());
+	color <<= 8;
+	color += Math.round(255* Math.random());
+    return "#" + color.toString(16);
+}
+
+function distance(a, b)
+{
+	a = a.substring(1);
+	b = b.substring(1);
+	var x, y, ret = 0;
+	x = (parseInt(a, 16) & 0xff0000) >> 16;
+	y = (parseInt(b, 16) & 0xff0000) >> 16;
+	ret += (x - y) * (x - y);
+	x = (parseInt(a, 16) & 0x00ff00) >> 8;
+	y = (parseInt(b, 16) & 0x00ff00) >> 8;
+	ret += (x - y) * (x - y);
+	x = (parseInt(a, 16) & 0x0000ff) >> 0;
+	y = (parseInt(b, 16) & 0x0000ff) >> 0;
+	ret += (x - y) * (x - y);
+	console.log(ret);
+	return Math.sqrt(ret);
+}
+
+for (var i = 0; i < cnt; i++)
+{
+	var x1 = Math.random() * elem.width;
+	var y1 = Math.random() * elem.height;
+	if ((x1 - xmid) * (x1 - xmid) + (y1 - ymid)  * (y1 - ymid) >= radius * radius)
+	{
+		continue;
+	}
+	clr.push(get_random_color());
+	xpoints.push(x1);
+	ypoints.push(y1);
+}
+
+for (var i = 0; i < xpoints.length; i++)
+{
+	context.beginPath();
+	context.arc(xpoints[i], ypoints[i], 3, 0, 2 * Math.PI, false);
+	context.globalAlpha = 0.5 + 0.5 * Math.random();
+	context.fillStyle = clr[i];
+	context.strokeStyle = clr[i];
+	context.fill();
+	context.stroke();
+	for (var j = 0; j < xpoints.length; j++)
+	{
+		if (distance(clr[i], clr[j]) < 30)
+		{
+			drawLine(xpoints[i], ypoints[i], xpoints[j], ypoints[j]);
+		}
+	}
+}
+
+</script>
+</body>
+</html>

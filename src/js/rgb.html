@@ -1,0 +1,56 @@
+<html>
+<body>
+<canvas id="canvas" width="700" height="700"></canvas>
+<script type="text/javascript">
+var elem = document.getElementById('canvas');
+var context = elem.getContext('2d');
+
+var xpoints = [];
+var ypoints = [];
+var radius = 200;
+var cnt = 10000;
+
+
+function get_random_color(offsetR, offsetG, offsetB) 
+{
+	var color = 0;
+    color += offsetR + Math.round((255 - offsetR) * Math.random());
+	color <<= 8;
+	color += offsetG + Math.round((255 - offsetG) * Math.random());
+	color <<= 8;
+	color += offsetB + Math.round((255 - offsetB) * Math.random());
+    return "#" + color.toString(16);
+}
+
+function generate_points(xmid, ymid, cnt, offsetR, offsetG, offsetB)
+{
+	for (var i = 0; i < cnt; i++) 
+	{
+		var x1 = Math.random() * elem.width;
+		var y1 = Math.random() * elem.height;
+		if ((x1 - xmid) * (x1 - xmid) + (y1 - ymid)  * (y1 - ymid) >= radius * radius)
+		{
+			//if (Math.random() >= 0.05)
+			{
+				continue;
+			}
+		}
+		context.beginPath();
+		xpoints.push(x1);
+		ypoints.push(y1);
+		context.arc(x1, y1, 3, 0, 2 * Math.PI, false);
+		var clr = get_random_color(offsetR, offsetG, offsetB);
+		context.globalAlpha = 0.5;
+		context.fillStyle = clr;
+		context.strokeStyle = clr;
+		context.fill();
+		context.stroke();
+	}
+}
+
+generate_points(300, 300, cnt, 255, 0, 0);
+generate_points(300 + radius, 300, cnt, 0, 255, 0);
+generate_points(300 + radius / 2, 300 + radius * Math.sqrt(3) / 2, cnt, 0, 0, 255);
+</script>
+</body>
+</html>

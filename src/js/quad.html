@@ -1,0 +1,61 @@
+<html>
+<body>
+<canvas id="canvas" width="1000" height="800"></canvas>
+<script type="text/javascript">
+var elem = document.getElementById('canvas');
+var context = elem.getContext('2d');
+
+var globalDepth = 10;
+var xpoints = [];
+var ypoints = [];
+
+function drawTree(x1, y1, x2, y2, depth)
+{
+	if (depth == 0)
+	{
+		return;
+	}
+	console.log(x1, y1, x2, y2);
+	
+	context.beginPath();
+	context.rect(x1, y1, x2 - x1, y2 - y1);
+	context.strokeStyle = '#000000';	
+	context.stroke();
+	var containPoints = false;
+	for (var i = 0; i < xpoints.length; i++)
+	{
+		if (x1 < xpoints[i] && xpoints[i] < x2 &&
+		    y1 < ypoints[i] && ypoints[i] < y2)
+		{
+			containPoints = true;
+			break;
+		}
+	}
+	if (containPoints)
+	{
+		var xmid = (x1 + x2) / 2;
+		var ymid = (y1 + y2) / 2;
+		drawTree(x1, y1, xmid, ymid, depth - 1);
+		drawTree(xmid, ymid, x2, y2, depth - 1);
+		drawTree(xmid, y1, x2, ymid, depth - 1);
+		drawTree(x1, ymid, xmid, y2, depth - 1);
+	}
+}
+for (var i = 0; i < 100; i++) 
+{
+	context.beginPath();
+	var x1 = Math.random() * elem.width;
+	xpoints.push(x1);
+	var y1 = Math.random() * elem.height;
+	ypoints.push(y1);
+	context.arc(x1, y1, 3, 0, 2 * Math.PI, false);
+	context.fillStyle = 'red';
+	context.strokeStyle = 'red';
+	context.fill();
+	context.stroke();
+}
+
+drawTree(0, 0, elem.width, elem.height, globalDepth)
+</script>
+</body>
+</html>

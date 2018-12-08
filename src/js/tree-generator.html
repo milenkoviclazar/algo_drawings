@@ -1,0 +1,41 @@
+<html>
+<body>
+<canvas id="canvas" width="1000" height="1000"></canvas>
+<script type="text/javascript">
+var elem = document.getElementById('canvas');
+var context = elem.getContext('2d');
+ 
+context.fillStyle = '#000';
+
+
+var factor = 0.9;
+var globalDepth = 8;
+
+function drawLine(x1, y1, x2, y2){
+	context.moveTo(x1, y1);
+	context.lineTo(x2, y2);
+}
+function drawTree(x1, y1, length, depth)
+{
+	context.lineWidth = depth / globalDepth;
+	if (depth == 0)
+	{
+		return;
+	}
+	var x2, y2;
+	for (var i = 0; i < 6; i += 2) 
+	{
+		x2 = x1 + Math.cos(Math.PI / 6 + i * Math.PI / 3.0) * length;
+		y2 = y1 + Math.sin(Math.PI / 6 + i * Math.PI / 3.0) * length;
+		drawLine(x1, y1, x2, y2);
+		drawTree(x2, y2, length * factor, depth - 1);	
+	}
+}
+
+context.beginPath();
+drawTree(elem.width / 2, elem.height / 2, 100, globalDepth);
+context.closePath();
+context.stroke();
+</script>
+</body>
+</html>
